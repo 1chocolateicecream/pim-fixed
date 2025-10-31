@@ -35,7 +35,7 @@ function Login() {
 
     return (<>
         <h1>Login page</h1>
-        <form action="" onSubmit={Submit}>
+        <form action="" onSubmit={handleSubmit}>
             <label htmlFor="email">Email</label>
             <input type="email" required={true} name="email" id="email" placeholder="email" value={data.email} onChange={handleChange}/><br />
             <label htmlFor="password">Password</label>

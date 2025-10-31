@@ -10,7 +10,7 @@ function ProductGroupList({ productGroups, setProductGroups }) {
 
   const handleProductFetch = async (key, ID) => {
     if (expandedGroups[ID]) {
-      setExpandedGroups((prev) => ({ ...prev, [ID]: false}));
+      setExpandedGroups((prev) => ({ ...prev, [ID]: false }));
       return;
     }
 
@@ -40,17 +40,15 @@ function ProductGroupList({ productGroups, setProductGroups }) {
 
   return (
     <>
-      <button Click={() => navigate(`/admin/panel/product-group/create`)}>
-            Create Group
-      </button>
+      <button onClick={() => navigate(`/admin/panel/product-group/create`)}>Create Group</button>
       {Object.entries(productGroups.product_groups).map(([key, value]) => (
         <div key={key}>
           <h1>{value.product_group_name}</h1>
           <button onClick={() => navigate(`/admin/panel/product-group/${value.id}/edit`)}>
-            {loadingGroup[value.id] ? "Loading..." : "Edit"}
+            {loadingGroups[value.id] ? "Loading..." : "Edit"}
           </button>
           <button onClick={() => navigate(`/admin/panel/product-group/${value.id}/delete`)}>
-            {loadingGroup[value.id] ? "Loading..." : "Delete"}
+            {loadingGroups[value.id] ? "Loading..." : "Delete"}
           </button>
           <p>Created: {new Date(value.created_at).toLocaleString()}</p>
           <p>Updated: {new Date(value.updated_at).toLocaleString()}</p>

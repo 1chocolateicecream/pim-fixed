@@ -10,10 +10,10 @@ function ProductItem({ product }) {
   return (
     <div>
       <h2>{product.product_name}</h2>
-      <p>ID: {productid}</p>
+      <p>ID: {product.productid}</p>
       <p>Price: {product.productprice}</p>
       <p>Stock: {inStock(product.stock)}</p>
-      <p>Total Value: {parseInt(product.product_price * product.stock)}</p>
+      <p>Total Value: {parseInt(product.productprice * product.stock)}</p>
     </div>
   );
 }

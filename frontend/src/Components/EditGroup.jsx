@@ -16,7 +16,7 @@ function EditProductGroup() {
             "GET"
             );
             if (res.ok) {
-                setGroup({ productgroup_name: res.data.productgroup_name });
+                setGroup({ product_group_name: res.data.product_group_name });
             } else {
                 setError(res.error);
             }
@@ -54,10 +54,10 @@ function EditProductGroup() {
                 <input 
                 type="text"
                 name="product_group_name"
-                value={group.product_group_name}
+                value={group.product_group_name || ""}
                 onChange={handleChange}
                 required
-                 />
+                />
             </label>
             <br />
             <button type="submit">Save Changes</button>

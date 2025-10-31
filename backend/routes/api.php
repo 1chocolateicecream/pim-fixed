@@ -9,7 +9,7 @@ Route::post('/admin/login', [AuthController::class, 'login']);
 Route::get('/admin/authorize', [AuthController::class, 'authorize_check']);
 
 Route::apiResource('/product-group', ProductGroupController::class);
-Route::post('/product-group/{Group}/products', [ProductsController::class, 'save']);
+Route::post('/product-group/{productGroup}/products', [ProductsController::class, 'store']);
 
 Route::get('/products', [ProductsController::class, 'index']);
 Route::get('/products/{product}', [ProductsController::class, 'show']);

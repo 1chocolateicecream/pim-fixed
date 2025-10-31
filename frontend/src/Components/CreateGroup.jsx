@@ -5,7 +5,7 @@ import { ProtectedFetch } from "./FetchHelper";
 function CreateProductGroup() {
     const navigate = useNavigate();
     const [group, setGroup] = useState({
-        productgroup_name: "",
+        product_group_name: "",
     });
 
     const handleChange = (e) => {

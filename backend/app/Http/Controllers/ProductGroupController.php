@@ -25,7 +25,7 @@ class ProductGroupController extends Controller
     {
         try {
             $validated = $request->validate([
-                'productgroup_name' => 'required|max:1000'
+                'product_group_name' => 'required|max:1000'
             ]);
         } catch (ValidationException $e) {
             return response()->json([
