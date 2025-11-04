@@ -5,11 +5,12 @@ import { ProtectedFetch } from "./FetchHelper";
 function CreateProductGroup() {
     const navigate = useNavigate();
     const [group, setGroup] = useState({
-        product_group_name: "",
+        name: "",
+        description: "",
     });
 
     const handleChange = (e) => {
-        const { name,value } = e.target;
+        const { name, value } = e.target;
         setGroup((prev) => ({ ...prev, [name]: value }))
     };
 
@@ -24,7 +25,7 @@ function CreateProductGroup() {
 
         if (res.ok) {
             alert("Product group created successfully!");
-            setGroup({ product_group_name: "" });
+            setGroup({ name: "", description: "" });
             navigate("/admin/panel")
         } else {
             alert("Failed to create product group!")
@@ -36,12 +37,22 @@ function CreateProductGroup() {
             <h1>Create New Product Group</h1>
             <label>
                 Group Name:
-                <input 
+                <input
                 type="text"
-                name="product_group_name" 
-                value={group.product_group_name}
+                name="name"
+                value={group.name}
                 onChange={handleChange}
                 required
+                />
+            </label>
+            <br />
+            <label>
+                Description:
+                <textarea
+                name="description"
+                value={group.description}
+                onChange={handleChange}
+                rows="4"
                 />
             </label>
             <br />

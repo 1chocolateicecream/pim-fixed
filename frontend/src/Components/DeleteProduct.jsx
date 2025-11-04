@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProtectedFetch } from "./FetchHelper";
 
@@ -5,28 +6,30 @@ function DeleteProduct() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const deleteProduct = async (e) => {
-        try {
-            const res = await ProtectedFetch(
-                `http://127.0.0.1:8000/api/products/${id}`,
-                "DELETE"
-            );
+    useEffect(() => {
+        const deleteProduct = async () => {
+            try {
+                const res = await ProtectedFetch(
+                    `http://127.0.0.1:8000/api/products/${id}`,
+                    "DELETE"
+                );
 
-            if (res.ok) {
-                alert("Product deleted succesfully!");
-            } else {
-                alert("Failed to delte product");
+                if (res.ok) {
+                    alert("Product deleted successfully!");
+                } else {
+                    alert("Failed to delete product.");
+                }
+            } catch (error) {
+                alert("An error occurred, please try again!");
+                console.log(error);
             }
-        } catch (error) {
-            alert("error occured please try again!");
-            console.log(error);
-        }
-        navigate("/admin/panel");
-    };
+            navigate("/admin/panel");
+        };
 
-    deleteProduct();
+        deleteProduct();
+    }, [id, navigate]);
 
-    return <p>Deleting Product...</p>;
+    return <p>Deleting product...</p>;
 }
 
 export default DeleteProduct;

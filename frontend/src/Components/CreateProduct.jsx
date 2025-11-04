@@ -2,20 +2,18 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProtectedFetch } from "./FetchHelper";
 
-function CreateProduct({onProductCreated}) {
+function CreateProduct() {
     const { groupid } = useParams();
     const navigate = useNavigate();
-    const [product, setProduct] = useState(
-        {
-            product_name: "",
-            product_price: "",
-            stock: "",
-        }
-    );
+    const [product, setProduct] = useState({
+        product_name: "",
+        product_price: "",
+        stock: "",
+    });
 
     const handleChange = (e) => {
-        const { name,value } = e.target;
-        setProduct((prev) => ({ ...prev, [name]: value}));
+        const { name, value } = e.target;
+        setProduct((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = async (e) => {
@@ -24,15 +22,15 @@ function CreateProduct({onProductCreated}) {
         const res = await ProtectedFetch(
             `http://127.0.0.1:8000/api/product-group/${groupid}/products`,
             "POST",
-            {...product, groupid}
+            product
         );
 
         if (res.ok) {
-            alert("Product created succesfully!")
-            setProduct({ product_name:"", product_price:"", stock:""});
+            alert("Product created successfully!");
+            setProduct({ product_name: "", product_price: "", stock: "" });
             navigate("/admin/panel");
         } else {
-            alert("Failed to create product.")
+            alert("Failed to create product.");
         }
     };
 
@@ -40,7 +38,8 @@ function CreateProduct({onProductCreated}) {
         <form onSubmit={handleSubmit}>
             <h1>Create New Product</h1>
             <label>
-                <input 
+                Product Name:
+                <input
                 type="text"
                 name="product_name"
                 value={product.product_name}
@@ -50,7 +49,8 @@ function CreateProduct({onProductCreated}) {
             </label>
             <br />
             <label>
-                <input 
+                Price:
+                <input
                 type="number"
                 name="product_price"
                 value={product.product_price}
@@ -60,7 +60,8 @@ function CreateProduct({onProductCreated}) {
             </label>
             <br />
             <label>
-                <input 
+                Stock:
+                <input
                 type="number"
                 name="stock"
                 value={product.stock}
@@ -71,7 +72,7 @@ function CreateProduct({onProductCreated}) {
             <br />
             <button type="submit">Create Product</button>
             <button type="button" onClick={() => navigate("/admin/panel")}>
-            Cancel
+                Cancel
             </button>
         </form>
     );

@@ -5,7 +5,7 @@ import { ProtectedFetch } from "./FetchHelper";
 function EditProductGroup() {
     const { groupid } = useParams();
     const navigate = useNavigate();
-    const [group, setGroup] = useState({ product_group_name: "" });
+    const [group, setGroup] = useState({ name: "", description: "" });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -16,7 +16,11 @@ function EditProductGroup() {
             "GET"
             );
             if (res.ok) {
-                setGroup({ product_group_name: res.data.product_group_name });
+                const groupData = res.data.product_groups || res.data;
+                setGroup({
+                    name: groupData.name || "",
+                    description: groupData.description || ""
+                });
             } else {
                 setError(res.error);
             }
@@ -39,24 +43,37 @@ function EditProductGroup() {
         );
 
         if (res.ok) {
-            alert("Product group updated succesfully!");
+            alert("Product group updated successfully!");
             navigate("/admin/panel");
         } else {
             alert("Failed to update product group!")
         }
     };
-    
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error loading group.</p>;
+
     return (
         <form onSubmit={handleSubmit}>
             <h1>Edit Product Group #{groupid}</h1>
             <label>
                 Group Name:
-                <input 
+                <input
                 type="text"
-                name="product_group_name"
-                value={group.product_group_name || ""}
+                name="name"
+                value={group.name}
                 onChange={handleChange}
                 required
+                />
+            </label>
+            <br />
+            <label>
+                Description:
+                <textarea
+                name="description"
+                value={group.description}
+                onChange={handleChange}
+                rows="4"
                 />
             </label>
             <br />

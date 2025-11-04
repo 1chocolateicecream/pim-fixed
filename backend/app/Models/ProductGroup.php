@@ -11,7 +11,7 @@ class ProductGroup extends Model
     /** @use HasFactory<\Database\Factories\ProductGroupFactory> */
     use HasFactory;
 
-    public $fillable = ["product_group_name"];
+    public $fillable = ["name", "description"];
 
     public function products() {
         return $this->hasMany(Product::class);

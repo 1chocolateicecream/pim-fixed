@@ -15,7 +15,7 @@ class ProductGroupController extends Controller
 
     public function index()
     {
-        $productGroups = ProductGroup::all();
+        $productGroups = ProductGroup::all()->keyBy('id');
         return response()->json([
             'product_groups' => $productGroups
         ], 200);
@@ -25,7 +25,8 @@ class ProductGroupController extends Controller
     {
         try {
             $validated = $request->validate([
-                'product_group_name' => 'required|max:1000'
+                'name' => 'required|max:1000',
+                'description' => 'nullable|max:5000'
             ]);
         } catch (ValidationException $e) {
             return response()->json([
@@ -52,7 +53,8 @@ class ProductGroupController extends Controller
     {
         try {
             $validated = $request->validate([
-                'product_group_name' => 'required|max:1000'
+                'name' => 'required|max:1000',
+                'description' => 'nullable|max:5000'
             ]);
         } catch (ValidationException $e) {
             return response()->json([
@@ -69,7 +71,7 @@ class ProductGroupController extends Controller
 
     public function destroy(ProductGroup $productGroup)
     {
-        $deletedProductGroupName = $productGroup->product_group_name;
+        $deletedProductGroupName = $productGroup->name;
         $productGroup->delete();
         return response()->json([
             "message" => "Deleted product group " . $deletedProductGroupName

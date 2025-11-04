@@ -16,11 +16,11 @@ function Router() {
         <Route path="/" element={<Login />} />
         <Route path="/admin/panel" element={<Auth Route={<App />} />} />
         <Route path="/admin/panel/post/:id" element={<Auth Route={<EditProduct />} />} />
-        <Route path="/admin/panel/:groupid/create/product" element={<CreateProduct />} />
-        <Route path="/admin/panel/post/:id/delete" element={<DeleteProduct />}/>
-        <Route path="/admin/panel/product-group/create" element={<CreateGroup />}/>
-        <Route path="/admin/panel/product-group/:groupid/edit" element={<EditGroup />}/>
-        <Route path="/admin/panel/product-group/:groupid/delete" element={<DeleteGroup />}/>
+        <Route path="/admin/panel/:groupid/create/product" element={<Auth Route={<CreateProduct />} />} />
+        <Route path="/admin/panel/post/:id/delete" element={<Auth Route={<DeleteProduct />} />} />
+        <Route path="/admin/panel/product-group/create" element={<Auth Route={<CreateGroup />} />} />
+        <Route path="/admin/panel/product-group/:groupid/edit" element={<Auth Route={<EditGroup />} />} />
+        <Route path="/admin/panel/product-group/:groupid/delete" element={<Auth Route={<DeleteGroup />} />} />
       </Routes>
     </BrowserRouter>
   );
